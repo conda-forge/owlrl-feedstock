@@ -8,7 +8,7 @@ package:
 source:
   - folder: dist
     url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-    sha256: ec0a7c1496aba88fdad2b2709c7d0e75031fb18ac1d00ecdb861e687cad6949e
+    sha256: efdebe76cf9ad148f316a9ae92e898e12b3b3690bd90218c898a2b676955b266
     patches:
       - 0001-remove-scripts.patch
   - folder: src
