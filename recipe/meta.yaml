@@ -32,14 +32,14 @@ requirements:
 
 test:
   source_files:
-    - src/tests
+    - src/test
   requires:
     - pytest-cov
   imports:
     - owlrl
   commands:
     - owlrl --help
-    - cd src && cd tests && pytest --cov=owlrl -k "not test_dt_not_type" -vv
+    - cd src && cd test && pytest --cov=owlrl -k "not dt_not_type and not maxqc1" -vv
 
 about:
   home: https://github.com/RDFLib/OWL-RL
