@@ -1,17 +1,14 @@
-{% set name = "owlrl" %}
 {% set version = "5.2.3" %}
 
 package:
-  name: {{ name }}
+  name: owlrl
   version: {{ version }}
 
 source:
-  - folder: dist
-    url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-    sha256: b1891d75b2c2fb0db9e1504a9b12dab738ed89236414c51393d1030597004342
-  - folder: src
-    url: https://github.com/RDFLib/OWL-RL/archive/v{{ version }}.tar.gz
-    sha256: f13cb3a7c30cbb6f9e4cf2eeddca2a526a3ccf26b13741e838ec6891656b9e0d
+  url: https://pypi.io/packages/source/o/owlrl/owlrl-{{ version }}.tar.gz
+  sha256: b1891d75b2c2fb0db9e1504a9b12dab738ed89236414c51393d1030597004342
+  patches:
+    - 0001-remove-scripts.patch
 
 build:
   noarch: python
@@ -26,24 +23,23 @@ requirements:
   run:
     - python >=3.6
     - rdflib >=5.0.0
-    - rdflib-jsonld >=0.4.0
 
 test:
   source_files:
-    - src/test
+    - test
   requires:
     - pytest-cov
   imports:
     - owlrl
   commands:
     - owlrl --help
-    - cd src && cd test && pytest --cov=owlrl -k "not dt_not_type and not maxqc1" -vv
+    - cd test && pytest --cov=owlrl -k "not dt_not_type and not maxqc1" -vv --cov-report term-missing:skip-covered --cov-fail-under 54
 
 about:
   home: https://github.com/RDFLib/OWL-RL
   license: W3C
   license_family: OTHER
-  license_file: w3c.txt
+  license_file: LICENSE.txt
   summary: OWL-RL and RDFS based RDF Closure inferencing for Python
   description: |
     A simple implementation of the OWL2 RL Profile, as well as a basic RDFS
