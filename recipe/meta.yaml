@@ -1,4 +1,4 @@
-{% set version = "5.2.3" %}
+{% set version = "6.0.2" %}
 
 package:
   name: owlrl
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/o/owlrl/owlrl-{{ version }}.tar.gz
-  sha256: b1891d75b2c2fb0db9e1504a9b12dab738ed89236414c51393d1030597004342
+  sha256: 904e3310ff4df15101475776693d2427d1f8244ee9a6a9f9e13c3c57fae90b74
   patches:
     - 0001-remove-scripts.patch
 
