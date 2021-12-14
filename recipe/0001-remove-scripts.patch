@@ -1,11 +1,111 @@
---- setup.py	2021-09-13 06:59:58.000000000 -0500
-+++ setup.py	2021-09-15 08:44:10.840642958 -0500
-@@ -35,7 +35,7 @@
+diff --git a/scripts/owlrl b/scripts/owlrl
+index 7cebef3..6399ada 100755
+--- a/scripts/owlrl
++++ b/scripts/owlrl
+@@ -2,29 +2,35 @@
+ 
+ import os
+ from optparse import OptionParser
+-from owlrl import convert_graph, RDFXML, TURTLE, JSON, AUTO, RDFA
++from owlrl import convert_graph
++
++RDFXML = "xml"
++TURTLE = "turtle"
++JSON = "json"
++AUTO = "auto"
++RDFA = "rdfa"
+ 
+ 
+ def main():
+     parser = OptionParser(usage="%prog [options] fname1 fname2 ...")
+     parser.disable_interspersed_args()
+-    
++
+     # The 'text' field is not used in the command line, but the CGI environment uses it. This means that there
+     # is no option to change that, but is added to the final option structure
+     parser.set_defaults(format=TURTLE, owlClosure="no", rdfsClosure="no", owlExtras="no", axioms="no", daxioms="no",
+                         iformat=AUTO, trimming="no", maximal="no", text=None)
+-    
++
+     parser.add_option("-f", "--file", type="string", dest="source",
+                       help="input file; should be a .rdf or .ttl file, for RDF/XML or Turtle, respectively. If "
+                             "missing, or if the value is '-' then standard input is used. Usage of this options is not "
+                             "really necessary, the fname in the command lines refer to files by themselves")
+-    
++
+     parser.add_option("--owlrl", action="store", dest="owlClosure", choices=["yes", "no"],
+                       help="execute OWL RL closure; argument must be yes|no [default: %default]")
+-    
++
+     parser.add_option("-w", action="store_const", dest="owlClosure", const="yes",
+                       help="OWL-RL is executed; shorthand for --owlrl=yes")
+-    
++
+     parser.add_option("--rdfs", action="store", dest="rdfsClosure", choices=["yes", "no"],
+                       help="execute RDFS closure; argument must be yes|no [default: %default]")
+ 
+@@ -39,13 +45,13 @@ def main():
+ 
+     parser.add_option("--axioms", action="store", dest="axioms", choices=["yes", "no"],
+                       help="axiomatic triples; argument must be yes|no [default: %default]")
+-    
++
+     parser.add_option("-a", action="store_const", dest="axioms", const="yes",
+                       help="add axiomatic triples; shorthand for --axioms=yes [default: %default]")
+ 
+     parser.add_option("--daxioms", action="store", dest="daxioms", choices=["yes", "no"],
+                       help="datatype axiomatic triples; argument must be true|false [default: %default]")
+-    
++
+     parser.add_option("-d", action="store_const", dest="daxioms", const="yes",
+                       help="add axiomatic triples; shorthand for --daxioms=yes [default: %default]")
+ 
+@@ -59,11 +65,11 @@ def main():
+     parser.add_option("-t", action="store_const", dest="trimming", const="yes",
+                       help="trim the output of OWL 2 RL and extension; shorthand for --trimming=yes "
+                            "[default: %default]")
+-    
++
+     parser.add_option("-o", "-s", "--serialization", "--syntax", action="store", dest="format",
+                       choices=[TURTLE, JSON, RDFXML],
+                       help="output format; argument must be turtle|json|xml [default: %default]")
+-    
++
+     parser.add_option("-i", "--input_syntax", action="store", dest="iformat",
+                       choices=[AUTO, TURTLE, JSON, RDFA, RDFXML],
+                       help="format of input; argument must be auto|turtle|xml|rdfa|json [default: %default]; auto "
+@@ -74,10 +80,10 @@ def main():
+         options.sources = []
+     else:
+         options.sources = [options.source]
+-        
++
+     if len(args) > 0:
+         options.sources += args
+-        
++
+     if len(options.sources) == 0:
+         # the default mechanism, ie, to use standard input
+         options.sources = ["-"]
+@@ -86,7 +92,7 @@ def main():
+         options.trimming = "yes"
+         options.owlClosure = "yes"
+         options.owlExtras = "yes"
+-            
++
+     print(convert_graph(options).decode('utf-8'))
+ 
+ 
+diff --git a/setup.py b/setup.py
+index 268dcc0..fde610b 100755
+--- a/setup.py
++++ b/setup.py
+@@ -35,7 +35,7 @@ with open_local(["requirements.txt"]) as req:
  setup(
      name="owlrl",
      packages=["owlrl"],
 -    scripts=["scripts/owlrl", "scripts/RDFConvertService"],
-+    entry_points={"console_scripts": ["owlrl = owlrl._cli:main"]},
++    entry_points={"console_scripts": ["owlrl=owlrl.cli:main"]},
      package_dir={"owlrl": "./owlrl"},
      version=version,
      description="OWL-RL and RDFS based RDF Closure inferencing for Python",
