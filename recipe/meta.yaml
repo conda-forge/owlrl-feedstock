@@ -33,7 +33,7 @@ test:
     - owlrl
   commands:
     - owlrl --help
-    - cd test && pytest --cov=owlrl -k "not dt_not_type and not maxqc1" -vv --cov-report term-missing:skip-covered --cov-fail-under 54
+    - cd test && pytest --cov=owlrl -k "not dt_not_type and not maxqc1" -vv --cov-report term-missing:skip-covered --cov-fail-under 49
 
 about:
   home: https://github.com/RDFLib/OWL-RL
