@@ -25,17 +25,17 @@ requirements:
   host:
     - pip
     - poetry-core
-    - python >=3.6
+    - python >=3.10
   run:
-    - python >=3.6
-    - rdflib >=5.0.0
+    - python >=3.10
+    - rdflib >=7.1.1
 
 test:
   source_files:
     - test
   requires:
-    - pytest
     - coverage
+    - pytest
   imports:
     - owlrl
   commands:
