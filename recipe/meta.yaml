@@ -17,6 +17,9 @@ build:
   number: 0
   entry_points:
     - owlrl = owlrl._cli:main
+  script:
+    - cp scripts/owlrl owlrl/_cli.py || copy scripts/owlrl owlrl/_cli.py
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
@@ -37,7 +40,7 @@ test:
     - owlrl
   commands:
     - owlrl --help
-    - cd test 
+    - cd test
     - coverage run --source=owlrl --branch -m pytest -vv --tb=long --color=yes {{ pytest_args }}
     - coverage report --show-missing --skip-covered --fail-under=49
 
