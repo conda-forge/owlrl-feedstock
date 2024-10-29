@@ -12,17 +12,12 @@ package:
 source:
   url: https://pypi.io/packages/source/o/owlrl/owlrl-{{ version }}.tar.gz
   sha256: 0c3e18b7603907cf9e33367152a18d6366a8bb8ef083d1f1a166f71f0985cea7
-  patches:
-    - 0001-remove-scripts.patch
 
 build:
   noarch: python
   number: 0
-  entry_points:
-    - owlrl = owlrl._cli:main
   script:
-    - cp scripts/owlrl owlrl/_cli.py || copy scripts/owlrl owlrl/_cli.py
-    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
 
 requirements:
   host:
@@ -42,7 +37,6 @@ test:
   imports:
     - owlrl
   commands:
-    - owlrl --help
     - cd test
     - coverage run --source=owlrl --branch -m pytest -vv --tb=long --color=yes -k "{{ pytest_skips }}"
     - coverage report --show-missing --skip-covered --fail-under={{ cov_fail_under }}
