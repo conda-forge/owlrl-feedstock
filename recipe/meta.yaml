@@ -1,6 +1,9 @@
 {% set version = "7.1.1" %}
 # the `if` avoids bot dupes
-{% if 1 %}{% set pytest_args = '-k "not dt_not_type and not maxqc1' %}{% endif %}
+{% if 1 %}
+  {% set pytest_skips = "not dt_not_type and not maxqc1" %}
+  {% set cov_fail_under = 49 %}
+{% endif %}
 
 package:
   name: owlrl
@@ -41,8 +44,8 @@ test:
   commands:
     - owlrl --help
     - cd test
-    - coverage run --source=owlrl --branch -m pytest -vv --tb=long --color=yes {{ pytest_args }}
-    - coverage report --show-missing --skip-covered --fail-under=49
+    - coverage run --source=owlrl --branch -m pytest -vv --tb=long --color=yes -k "{{ pytest_skips }}"
+    - coverage report --show-missing --skip-covered --fail-under={{ cov_fail_under }}
 
 about:
   home: https://github.com/RDFLib/OWL-RL
