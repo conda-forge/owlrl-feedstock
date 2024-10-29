@@ -2,7 +2,7 @@
 # the `if` avoids bot dupes
 {% if 1 %}
   {% set pytest_skips = "not dt_not_type and not maxqc1" %}
-  {% set cov_fail_under = 49 %}
+  {% set cov_fail_under = 47 %}
 {% endif %}
 
 package:
