@@ -1,4 +1,4 @@
-{% set version = "7.1.1" %}
+{% set version = "7.1.2" %}
 # the `if` avoids bot dupes
 {% if 1 %}
   {% set pytest_skips = "not dt_not_type and not maxqc1" %}
@@ -12,10 +12,10 @@ package:
 source:
   - folder: dist
     url: https://pypi.io/packages/source/o/owlrl/owlrl-{{ version }}.tar.gz
-    sha256: 0c3e18b7603907cf9e33367152a18d6366a8bb8ef083d1f1a166f71f0985cea7
+    sha256: 966136f303f08f3eb190f6631c31a03b1bc5744d6c15189d7fb638a563ee61d2
   - folder: src
     url: https://github.com/RDFLib/OWL-RL/archive/refs/tags/{{ version }}.tar.gz
-    sha256: e9848f259a252ab6ed92ea2b07436484b6b99b07d88bcd51b3db4ff79c2d2fe4
+    sha256: e0b9a0a526dcee112922faf680c38348394507d65acd978c546eee656d4d5f23
 
 build:
   noarch: python
@@ -27,9 +27,9 @@ requirements:
   host:
     - pip
     - poetry-core
-    - python >=3.10
+    - python >=3.8
   run:
-    - python >=3.10
+    - python >=3.8
     - rdflib >=7.1.1
 
 test:
