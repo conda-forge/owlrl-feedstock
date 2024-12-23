@@ -11,7 +11,7 @@ package:
 
 source:
   - folder: dist
-    url: https://pypi.io/packages/source/o/owlrl/owlrl-{{ version }}.tar.gz
+    url: https://pypi.org/packages/source/o/owlrl/owlrl-{{ version }}.tar.gz
     sha256: 966136f303f08f3eb190f6631c31a03b1bc5744d6c15189d7fb638a563ee61d2
   - folder: src
     url: https://github.com/RDFLib/OWL-RL/archive/refs/tags/{{ version }}.tar.gz
@@ -19,7 +19,7 @@ source:
 
 build:
   noarch: python
-  number: 0
+  number: 1
   script:
     - cd dist && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
 
@@ -27,9 +27,9 @@ requirements:
   host:
     - pip
     - poetry-core
-    - python >=3.8
+    - python {{ python_min }}
   run:
-    - python >=3.8
+    - python >={{ python_min }}
     - rdflib >=7.1.1
 
 test:
@@ -38,6 +38,7 @@ test:
   requires:
     - coverage
     - pytest
+    - python {{ python_min }}
   imports:
     - owlrl
   commands:
