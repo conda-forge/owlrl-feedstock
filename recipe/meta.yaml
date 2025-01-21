@@ -1,4 +1,4 @@
-{% set version = "7.1.2" %}
+{% set version = "7.1.3" %}
 # the `if` avoids bot dupes
 {% if 1 %}
   {% set pytest_skips = "not dt_not_type and not maxqc1" %}
@@ -12,14 +12,14 @@ package:
 source:
   - folder: dist
     url: https://pypi.org/packages/source/o/owlrl/owlrl-{{ version }}.tar.gz
-    sha256: 966136f303f08f3eb190f6631c31a03b1bc5744d6c15189d7fb638a563ee61d2
+    sha256: c9acf66135821ed7a6c4e002387bdb60a5804c86bf0210310df7d5a5da5d2eb1
   - folder: src
     url: https://github.com/RDFLib/OWL-RL/archive/refs/tags/{{ version }}.tar.gz
-    sha256: e0b9a0a526dcee112922faf680c38348394507d65acd978c546eee656d4d5f23
+    sha256: 3beb6afded7e7c7db7cf7d78940a214274083c045332968200e14b496a9bd04e
 
 build:
   noarch: python
-  number: 1
+  number: 0
   script:
     - cd dist && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
 
@@ -30,7 +30,7 @@ requirements:
     - python {{ python_min }}
   run:
     - python >={{ python_min }}
-    - rdflib >=7.1.1
+    - rdflib >=7.1.3
 
 test:
   source_files:
