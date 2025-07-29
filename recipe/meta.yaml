@@ -1,4 +1,4 @@
-{% set version = "7.1.3" %}
+{% set version = "7.1.4" %}
 # the `if` avoids bot dupes
 {% if 1 %}
   {% set pytest_skips = "not dt_not_type and not maxqc1" %}
@@ -12,10 +12,10 @@ package:
 source:
   - folder: dist
     url: https://pypi.org/packages/source/o/owlrl/owlrl-{{ version }}.tar.gz
-    sha256: c9acf66135821ed7a6c4e002387bdb60a5804c86bf0210310df7d5a5da5d2eb1
+    sha256: 60bd4067e346b9111f0a2924565afe97ac6595b98b2bbe953928b5113971daf7
   - folder: src
     url: https://github.com/RDFLib/OWL-RL/archive/refs/tags/{{ version }}.tar.gz
-    sha256: 3beb6afded7e7c7db7cf7d78940a214274083c045332968200e14b496a9bd04e
+    sha256: d93144039968f1ae39f3047bf5681f59616976cdd51f681a7c196afd82235506
 
 build:
   noarch: python
