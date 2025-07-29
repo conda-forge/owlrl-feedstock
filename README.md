@@ -9,11 +9,10 @@ Package license: W3C
 
 Summary: OWL-RL and RDFS based RDF Closure inferencing for Python
 
-Documentation: https://owl-rl.readthedocs.io
+Documentation: https://owl-rl.readthedocs.io/
 
 A simple implementation of the OWL2 RL Profile, as well as a basic RDFS
 inference, on top of RDFLib. Based mechanical forward chaining.
-
 
 Current build status
 ====================
