@@ -16,7 +16,10 @@ source:
     sha256: b1e920cd5017044b17c1791e18ff5b51bd48b03755b2aa22896827ef3820a7d8
     target_directory: dist
     patches:
-      - 0000-fix-version.patch
+      # remove after https://github.com/RDFLib/OWL-RL/pull/82
+      - if: version == "7.6.1"
+        then:
+          - 0000-fix-version.patch
   - url: https://github.com/RDFLib/OWL-RL/archive/refs/tags/v${{ version }}.tar.gz
     sha256: 9b5f9c5284bc1c0a789e4e6c1ffb8d0f4da9671700f189484dc4d9c05ab86d09
     target_directory: src
