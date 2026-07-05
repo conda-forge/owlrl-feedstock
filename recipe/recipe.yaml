@@ -2,7 +2,8 @@
 schema_version: 1
 
 context:
-  version: 7.1.4
+  version: "7.6.1"
+  python_check_max: "3.14"
   pytest_skips: not (dt_not_type or maxqc1)
   cov_fail_under: 47
 
@@ -12,10 +13,15 @@ package:
 
 source:
   - url: https://pypi.org/packages/source/o/owlrl/owlrl-${{ version }}.tar.gz
-    sha256: 60bd4067e346b9111f0a2924565afe97ac6595b98b2bbe953928b5113971daf7
+    sha256: b1e920cd5017044b17c1791e18ff5b51bd48b03755b2aa22896827ef3820a7d8
     target_directory: dist
-  - url: https://github.com/RDFLib/OWL-RL/archive/refs/tags/${{ version }}.tar.gz
-    sha256: d93144039968f1ae39f3047bf5681f59616976cdd51f681a7c196afd82235506
+    patches:
+      # remove after https://github.com/RDFLib/OWL-RL/pull/82
+      - if: version == "7.6.1"
+        then:
+          - 0000-fix-version.patch
+  - url: https://github.com/RDFLib/OWL-RL/archive/refs/tags/v${{ version }}.tar.gz
+    sha256: 9b5f9c5284bc1c0a789e4e6c1ffb8d0f4da9671700f189484dc4d9c05ab86d09
     target_directory: src
 
 build:
@@ -28,11 +34,13 @@ build:
 requirements:
   host:
     - pip
-    - poetry-core
+    - poetry-core >=2.0
     - python ${{ python_min }}.*
   run:
     - python >=${{ python_min }}
-    - rdflib >=7.1.4
+    - rdflib >=7.6.0
+  run_constraints:
+    - pyoxigraph >=0.5.6
 
 tests:
   - python:
@@ -40,13 +48,14 @@ tests:
       pip_check: true
       python_version:
         - ${{ python_min }}.*
-        - 3.13.*
+        - ${{ python_check_max }}.*
   - files:
       source:
         - src/test/
     requirements:
       run:
         - coverage
+        - pyoxigraph
         - pytest
         - python ${{ python_min }}.*
     script:
@@ -63,7 +72,8 @@ about:
   description: |
     A simple implementation of the OWL2 RL Profile, as well as a basic RDFS
     inference, on top of RDFLib. Based mechanical forward chaining.
-  homepage: https://github.com/RDFLib/OWL-RL
+  homepage: https://pypi.org/project/owl-rl
+  repository: https://github.com/RDFLib/OWL-RL
   documentation: https://owl-rl.readthedocs.io
 
 extra:
