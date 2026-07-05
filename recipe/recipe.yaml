@@ -3,6 +3,7 @@ schema_version: 1
 
 context:
   version: "7.6.1"
+  python_check_max: "3.14"
   pytest_skips: not (dt_not_type or maxqc1)
   cov_fail_under: 47
 
@@ -32,7 +33,9 @@ requirements:
     - python ${{ python_min }}.*
   run:
     - python >=${{ python_min }}
-    - rdflib >=7.1.4
+    - rdflib >=7.6.0
+  run_constraints:
+    - pyoxigraph >=0.5.6
 
 tests:
   - python:
@@ -40,13 +43,14 @@ tests:
       pip_check: true
       python_version:
         - ${{ python_min }}.*
-        - 3.13.*
+        - ${{ python_check_max }}.*
   - files:
       source:
         - src/test/
     requirements:
       run:
         - coverage
+        - pyoxigraph
         - pytest
         - python ${{ python_min }}.*
     script:
