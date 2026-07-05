@@ -3,11 +3,13 @@ About owlrl-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/owlrl-feedstock/blob/main/LICENSE.txt)
 
-Home: https://github.com/RDFLib/OWL-RL
+Home: https://pypi.org/project/owl-rl
 
 Package license: W3C
 
 Summary: OWL-RL and RDFS based RDF Closure inferencing for Python
+
+Development: https://github.com/RDFLib/OWL-RL
 
 Documentation: https://owl-rl.readthedocs.io/
 

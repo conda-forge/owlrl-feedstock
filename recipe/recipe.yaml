@@ -67,7 +67,8 @@ about:
   description: |
     A simple implementation of the OWL2 RL Profile, as well as a basic RDFS
     inference, on top of RDFLib. Based mechanical forward chaining.
-  homepage: https://github.com/RDFLib/OWL-RL
+  homepage: https://pypi.org/project/owl-rl
+  repository: https://github.com/RDFLib/OWL-RL
   documentation: https://owl-rl.readthedocs.io
 
 extra:
