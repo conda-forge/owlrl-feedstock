@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "7.6.1"
+  version: "7.6.2"
   python_check_max: "3.14"
   pytest_skips: not (dt_not_type or maxqc1)
   cov_fail_under: 47
@@ -13,15 +13,10 @@ package:
 
 source:
   - url: https://pypi.org/packages/source/o/owlrl/owlrl-${{ version }}.tar.gz
-    sha256: b1e920cd5017044b17c1791e18ff5b51bd48b03755b2aa22896827ef3820a7d8
+    sha256: c743f35c2d908396e77823852bb1ebbce88340cd49961493983bec42c93283a8
     target_directory: dist
-    patches:
-      # remove after https://github.com/RDFLib/OWL-RL/pull/82
-      - if: version == "7.6.1"
-        then:
-          - 0000-fix-version.patch
   - url: https://github.com/RDFLib/OWL-RL/archive/refs/tags/v${{ version }}.tar.gz
-    sha256: 9b5f9c5284bc1c0a789e4e6c1ffb8d0f4da9671700f189484dc4d9c05ab86d09
+    sha256: ba7b0f1d35680acc45c47b17fa4c46777e939c4f7339f131ad145ce8ae2a7ce5
     target_directory: src
 
 build:
